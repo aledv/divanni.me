@@ -303,14 +303,16 @@
 /* Desktop: chevrons in the space above/below the two visible rows, shown only when there is more in that direction */
 @media only screen and (min-width : 768px) {
     .repo-nav {
+        --nav: min(26px, calc((var(--m) + var(--p)) * 0.45));
+
         position: absolute;
         left: 50%;
         z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
+        width: var(--nav);
+        height: var(--nav);
         padding: 0;
         color: #e11d48;
         cursor: pointer;
@@ -326,8 +328,8 @@
     }
 
     .repo-nav svg {
-        width: 24px;
-        height: 24px;
+        width: calc(var(--nav) * 0.75);
+        height: calc(var(--nav) * 0.75);
         fill: currentcolor;
         stroke: currentcolor;
         stroke-width: 1px;
@@ -344,12 +346,12 @@
     }
 
     .repo-nav-down {
-        bottom: calc((var(--m) + var(--p) - 32px) / 2);
+        bottom: calc((var(--m) + var(--p) - var(--nav)) / 2);
         animation: repo-nav-bob-down 1.6s ease-in-out infinite;
     }
 
     .repo-nav-up {
-        top: calc(var(--pad) + var(--head) + (var(--m) + var(--p) - 32px) / 2);
+        top: calc(var(--pad) + var(--head) + (var(--m) + var(--p) - var(--nav)) / 2);
         animation: repo-nav-bob-up 1.6s ease-in-out infinite;
     }
 
@@ -360,7 +362,7 @@
         }
 
         50% {
-            transform: translate(-50%, 4px);
+            transform: translate(-50%, 3px);
         }
     }
 
@@ -371,7 +373,7 @@
         }
 
         50% {
-            transform: translate(-50%, -4px);
+            transform: translate(-50%, -3px);
         }
     }
 }
