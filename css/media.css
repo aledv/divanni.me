@@ -299,3 +299,82 @@
         font-size: clamp(10px, 1.4vh, 14px);
     }
 }
+
+/* Desktop: chevrons in the space above/below the two visible rows, shown only when there is more in that direction */
+@media only screen and (min-width : 768px) {
+    .repo-nav {
+        position: absolute;
+        left: 50%;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 28px;
+        padding: 0;
+        color: #044dd1;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        border-radius: 14px;
+        transform: translateX(-50%);
+    }
+
+    .repo-nav[hidden] {
+        display: none;
+    }
+
+    .repo-nav svg {
+        width: 22px;
+        height: 22px;
+        fill: currentcolor;
+    }
+
+    .repo-nav:hover {
+        background: #e8eefc;
+    }
+
+    .repo-nav:focus-visible {
+        outline: 2px solid #044dd1;
+        outline-offset: 2px;
+    }
+
+    .repo-nav-down {
+        bottom: calc((var(--m) + var(--p) - 28px) / 2);
+        animation: repo-nav-bob-down 1.6s ease-in-out infinite;
+    }
+
+    .repo-nav-up {
+        top: calc(var(--pad) + var(--head) + (var(--m) + var(--p) - 28px) / 2);
+        animation: repo-nav-bob-up 1.6s ease-in-out infinite;
+    }
+
+    @keyframes repo-nav-bob-down {
+        0%,
+        100% {
+            transform: translate(-50%, 0);
+        }
+
+        50% {
+            transform: translate(-50%, 4px);
+        }
+    }
+
+    @keyframes repo-nav-bob-up {
+        0%,
+        100% {
+            transform: translate(-50%, 0);
+        }
+
+        50% {
+            transform: translate(-50%, -4px);
+        }
+    }
+}
+
+@media only screen and (min-width : 768px) and (prefers-reduced-motion: reduce) {
+    .repo-nav-down,
+    .repo-nav-up {
+        animation: none;
+    }
+}

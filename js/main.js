@@ -16,6 +16,8 @@ try {
         var split = document.querySelector('.split');
         var portfolio = document.getElementById('portfolio');
         var win = document.getElementById('repo-window');
+        var navUp = document.getElementById('repo-up');
+        var navDown = document.getElementById('repo-down');
         var TOL = 4;            // px
         var TAKE = 500;         // px before the end of the column where wheel scrolling is done by us
         var SNAP_MS = 650;      // duration of a snap
@@ -96,9 +98,18 @@ try {
             return Math.max(0, Math.ceil(win.querySelectorAll('.repo-card').length / 3) - 2);
         }
 
+        // chevrons: only where there is more in that direction (k = target row)
+        function updateNav(k) {
+            if (navUp && navDown) {
+                navUp.hidden = k <= 0;
+                navDown.hidden = k >= maxRow();
+            }
+        }
+
         function stepTo(k) {
             var row = Math.max(0, Math.min(maxRow(), k));
             lastK = row;
+            updateNav(row);
             animate(win.scrollTop, row * rowStep(), STEP_MS, function(v) {
                 win.scrollTop = v;
             }, 'row ' + row);
@@ -204,6 +215,9 @@ try {
         window.addEventListener('pointercancel', function() { pointerDown = false; });
         setInterval(function() {
             var now = Date.now();
+            if (!animating && rowStep()) {
+                updateNav(Math.round(win.scrollTop / rowStep()));
+            }
             if (!desktop.matches || animating || pointerDown || now - lastScroll < 120 || now - lastWheel < 120) {
                 return;
             }
@@ -219,6 +233,17 @@ try {
                 }
             }
         }, 200);
+
+        [navUp, navDown].forEach(function(btn, i) {
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    if (!animating && rowStep()) {
+                        lastDown = i === 1;
+                        stepTo(Math.round(win.scrollTop / rowStep()) + (i === 1 ? 1 : -1));
+                    }
+                });
+            }
+        });
 
         window.addEventListener('resize', function() {
             win.scrollTop = lastK * rowStep();

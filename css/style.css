@@ -571,6 +571,10 @@ h2{
     font-size:24px
 }
 
+.repo-nav{
+    display:none
+}
+
 .portfolio-heading{
     display:flex;
     align-items:center;
