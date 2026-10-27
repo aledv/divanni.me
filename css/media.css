@@ -309,14 +309,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 36px;
-        height: 28px;
+        width: 32px;
+        height: 32px;
         padding: 0;
-        color: #044dd1;
+        color: #e11d48;
         cursor: pointer;
-        background: transparent;
-        border: 0;
-        border-radius: 14px;
+        background: #fff;
+        border: 1px solid #fbc9d4;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
         transform: translateX(-50%);
     }
 
@@ -325,27 +326,30 @@
     }
 
     .repo-nav svg {
-        width: 22px;
-        height: 22px;
+        width: 24px;
+        height: 24px;
         fill: currentcolor;
+        stroke: currentcolor;
+        stroke-width: 1px;
     }
 
     .repo-nav:hover {
-        background: #e8eefc;
+        background: #fff1f4;
+        box-shadow: 0 3px 12px rgb(225 29 72 / 35%);
     }
 
     .repo-nav:focus-visible {
-        outline: 2px solid #044dd1;
+        outline: 2px solid #e11d48;
         outline-offset: 2px;
     }
 
     .repo-nav-down {
-        bottom: calc((var(--m) + var(--p) - 28px) / 2);
+        bottom: calc((var(--m) + var(--p) - 32px) / 2);
         animation: repo-nav-bob-down 1.6s ease-in-out infinite;
     }
 
     .repo-nav-up {
-        top: calc(var(--pad) + var(--head) + (var(--m) + var(--p) - 28px) / 2);
+        top: calc(var(--pad) + var(--head) + (var(--m) + var(--p) - 32px) / 2);
         animation: repo-nav-bob-up 1.6s ease-in-out infinite;
     }
 
