@@ -53,7 +53,7 @@
     "url": "https://github.com/aledv/hp-150nw-monitor"
   },
   {
-    "name": "cups_api_json",
+    "name": "cups-api-json",
     "description": "Tiny REST API that reports the state of a local CUPS print server as JSON (default printer, status, job counts)",
     "language": "Python",
     "topics": [
@@ -67,12 +67,12 @@
     "stars": 0,
     "forks": 0,
     "watchers": 1,
-    "url": "https://github.com/aledv/cups_api_json"
+    "url": "https://github.com/aledv/cups-api-json"
   },
   {
     "name": "divanni.me",
     "description": "Source of my personal website divanni.me: single-page CV with a Portfolio of my GitHub projects (HTML/CSS/JS, nginx, Docker)",
-    "language": "JavaScript",
+    "language": "CSS",
     "topics": [
       "css",
       "docker",
