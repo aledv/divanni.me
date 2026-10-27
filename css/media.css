@@ -172,20 +172,23 @@
 
 
 
-/* Desktop: the first Portfolio screen is exactly one viewport (title + 3x2 tiles); further rows continue below
-   and are reached by scrolling. All rows have the height of half the space left under the heading; the gap under
-   the second row keeps the third one just outside the first screen. */
+/* Desktop: the Portfolio is one fixed viewport-high stage: heading on top, below it a window that shows two rows of
+   tiles (3x2) with equal space above and below. The window is clipped to the two rows (plus a few px for the hover
+   lift); js/main.js moves its scroll position one row at a time. */
 @media only screen and (min-width : 768px) {
     .portfolio {
         --vh: 100vh;
         --pad: clamp(16px, 4vh, 56px);
         --head: clamp(64px, 13vh, 140px);
         --gap: clamp(10px, 2.4vh, 32px);
-        --row: calc((var(--vh) - var(--pad) - var(--head) - 2 * var(--gap)) / 2);
+        --m: clamp(20px, 6vh, 64px);
+        --p: calc(var(--gap) * 0.4);
+        --row: calc((var(--vh) - var(--pad) - var(--head) - 2 * var(--m) - var(--gap) - 2 * var(--p)) / 2);
 
         box-sizing: border-box;
-        min-height: var(--vh);
-        padding: var(--pad) 0;
+        height: var(--vh);
+        padding: var(--pad) 0 0;
+        overflow: hidden;
     }
 
     @supports (height: 100svh) {
@@ -194,11 +197,29 @@
         }
     }
 
+    /* whole pixels, so that every row step is exactly the same distance (the window scrolls by integers) */
+    @supports (width: round(down, 1px, 1px)) {
+        .portfolio {
+            --pad: round(down, clamp(16px, 4vh, 56px), 1px);
+            --head: round(down, clamp(64px, 13vh, 140px), 1px);
+            --gap: round(down, clamp(10px, 2.4vh, 32px), 1px);
+            --m: round(down, clamp(20px, 6vh, 64px), 1px);
+            --p: round(down, calc(var(--gap) * 0.4), 1px);
+            --row: round(down, calc((var(--vh) - var(--pad) - var(--head) - 2 * var(--m) - var(--gap) - 2 * var(--p)) / 2), 1px);
+        }
+    }
+
     .portfolio-head {
         display: flex;
         flex-direction: column;
         justify-content: center;
         height: var(--head);
+    }
+
+    .repo-window {
+        height: calc(2 * var(--row) + var(--gap) + 2 * var(--p));
+        margin-top: var(--m);
+        overflow: hidden;
     }
 
     .portfolio .container {
@@ -227,6 +248,7 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
         grid-auto-rows: var(--row);
         gap: var(--gap);
+        padding: var(--p) 0;
     }
 
     .repo-card {

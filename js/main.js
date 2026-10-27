@@ -3,20 +3,23 @@
  */
 /* global gsap -- loaded from the jsDelivr CDN in index.html before this script */
 
-// Desktop page snap: at the end of the right column the next downward gesture jumps to the
-// Portfolio (100vh), an upward gesture from there jumps back. Normal scrolling elsewhere is untouched.
-// The jump is a JS-driven animation (not native smooth scroll, which any wheel/inertia event can cancel),
+// Desktop page snap: at the end of the right column the next downward gesture jumps to the Portfolio (one
+// viewport-high stage), an upward gesture from its first rows jumps back. Inside the stage the tile rows move
+// one row per gesture (the #repo-window scroll position). Normal scrolling elsewhere is untouched.
+// Every move is a JS-driven animation (not native smooth scroll, which any wheel/inertia event can cancel),
 // wheel events are swallowed while it runs and until trackpad inertia has died out, and a watchdog finishes
-// the snap if the page ever rests between the two stable positions. ?debug=1 shows a small status box.
+// a move if the page or the rows ever rest between two stable positions. ?debug=1 shows a small status box.
 try {
     (function() {
         var desktop = window.matchMedia('(min-width: 768px)');
         var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
         var split = document.querySelector('.split');
         var portfolio = document.getElementById('portfolio');
+        var win = document.getElementById('repo-window');
         var TOL = 4;            // px
         var TAKE = 500;         // px before the end of the column where wheel scrolling is done by us
         var SNAP_MS = 650;      // duration of a snap
+        var STEP_MS = 450;      // duration of a one-row move
         var LINK_MS = 950;      // duration of the scroll started by the Portfolio link
         var QUIET = 250;        // ms without wheel events that ends a gesture (trackpad inertia)
         var QUIET_MAX = 4000;   // ms, upper bound of the inertia absorption after a snap
@@ -29,8 +32,9 @@ try {
         var lastDown = true;    // direction of the last gesture, used to finish an interrupted snap
         var pointerDown = false;
         var lastEvent = '-';
+        var lastK = 0;          // row position of the window (0 = rows 1-2)
 
-        if (!split || !portfolio) {
+        if (!split || !portfolio || !win) {
             return;
         }
 
@@ -51,13 +55,13 @@ try {
             animating = false;
         }
 
-        // moves to y; instant when ms is 0 or with reduced motion. Always ends exactly on y.
-        function animateTo(y, ms, why) {
+        // Moves a value from -> to (apply writes it); instant when ms is 0 or with reduced motion.
+        // Always ends exactly on `to`.
+        function animate(from, to, ms, apply, why) {
             stopAnimation();
-            lastEvent = 'go ' + Math.round(y) + ' (' + why + ')';
-            var from = window.scrollY;
-            if (!ms || reduced.matches || Math.abs(y - from) < 1) {
-                window.scrollTo({ top: y, behavior: 'auto' });
+            lastEvent = 'go ' + Math.round(to) + ' (' + why + ')';
+            if (!ms || reduced.matches || Math.abs(to - from) < 1) {
+                apply(to);
                 startQuiet();
                 return;
             }
@@ -66,7 +70,7 @@ try {
             (function frame(now) {
                 var t = Math.min(1, (now - t0) / ms);
                 var k = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-                window.scrollTo({ top: t < 1 ? from + (y - from) * k : y, behavior: 'auto' });
+                apply(t < 1 ? from + (to - from) * k : to);
                 if (t < 1) {
                     rafId = requestAnimationFrame(frame);
                 } else {
@@ -74,6 +78,30 @@ try {
                     startQuiet();
                 }
             }(t0));
+        }
+
+        function animateTo(y, ms, why) {
+            animate(window.scrollY, y, ms, function(v) {
+                window.scrollTo({ top: v, behavior: 'auto' });
+            }, why);
+        }
+
+        // rows of tiles in the window: one step = distance between two rows; 3 tiles per row, 2 rows visible
+        function rowStep() {
+            var cards = win.querySelectorAll('.repo-card');
+            return cards.length > 3 ? cards[3].offsetTop - cards[0].offsetTop : 0;
+        }
+
+        function maxRow() {
+            return Math.max(0, Math.ceil(win.querySelectorAll('.repo-card').length / 3) - 2);
+        }
+
+        function stepTo(k) {
+            var row = Math.max(0, Math.min(maxRow(), k));
+            lastK = row;
+            animate(win.scrollTop, row * rowStep(), STEP_MS, function(v) {
+                win.scrollTop = v;
+            }, 'row ' + row);
         }
 
         // Tolerances and a clamp instead of exact positions: fractional scroll offsets (display scaling),
@@ -86,20 +114,36 @@ try {
             }
             var p = positions();
             var y = window.scrollY;
+            if (y >= p.top - TOL) {
+                // on the Portfolio stage: one row per gesture; up from the first rows goes back to the column
+                var step = rowStep();
+                var k = step ? Math.round(win.scrollTop / step) : 0;
+                if (down) {
+                    if (k < maxRow()) {
+                        stepTo(k + 1);
+                    } else {
+                        lastEvent = 'last row';
+                    }
+                } else if (k > 0) {
+                    stepTo(k - 1);
+                } else {
+                    animateTo(p.end, SNAP_MS, 'up');
+                }
+                return true;
+            }
             if (down) {
-                if (y >= p.end - TOL && y < p.top - TOL) {
+                if (y >= p.end - TOL) {
+                    win.scrollTop = 0;
+                    lastK = 0;
                     animateTo(p.top, SNAP_MS, 'down');
                     return true;
                 }
-                if (y < p.end - TOL && delta > 0 && y + delta >= p.end - TOL) {
+                if (delta > 0 && y + delta >= p.end - TOL) {
                     animateTo(p.end, 0, 'clamp');   // stop exactly at the end of the column: the next gesture snaps
                     return true;
                 }
-            } else if (y > p.end + TOL && y <= p.top + TOL) {
-                animateTo(p.end, SNAP_MS, 'up');    // from the top of the Portfolio (or from between): back to the column
-                return true;
-            } else if (y > p.top + TOL && delta > 0 && y - delta <= p.top + TOL) {
-                animateTo(p.top, 0, 'clamp-up');    // inside the Portfolio: stop exactly at its top, the next gesture snaps
+            } else if (y > p.end + TOL) {
+                animateTo(p.end, SNAP_MS, 'up');    // from between the column and the stage
                 return true;
             }
             return false;
@@ -126,21 +170,6 @@ try {
                 return;
             }
             lastEvent = 'wheel ' + Math.round(e.deltaY);
-            if (e.deltaY < 0 && desktop.matches) {
-                // same at the top of the Portfolio: scroll ourselves in its first stretch, clamped to the top
-                var q = positions();
-                var yy = window.scrollY;
-                if (yy > q.top + TOL && yy <= q.top + TAKE) {
-                    var up = Math.max(q.top, yy + wheelPixels(e));
-                    window.scrollTo({ top: up, behavior: 'auto' });
-                    lastDown = false;
-                    if (up <= q.top + 0.5) {
-                        startQuiet();
-                    }
-                    e.preventDefault();
-                    return;
-                }
-            }
             if (e.deltaY > 0 && desktop.matches) {
                 // In the last stretch of the column we scroll ourselves, clamped to the end: native scrolling
                 // (compositor, momentum) could overshoot and we would then have to move the page backwards.
@@ -182,8 +211,18 @@ try {
             var y = window.scrollY;
             if (y > p.end + TOL && y < p.top - TOL) {
                 animateTo(lastDown ? p.top : p.end, SNAP_MS, 'watchdog');
+            } else if (y >= p.top - TOL && rowStep()) {
+                // the rows rest between two positions (e.g. the browser scrolled the window to a focused tile)
+                var pos = win.scrollTop / rowStep();
+                if (Math.abs(pos - Math.round(pos)) * rowStep() > TOL) {
+                    stepTo(lastDown ? Math.ceil(pos) : Math.floor(pos));
+                }
             }
         }, 200);
+
+        window.addEventListener('resize', function() {
+            win.scrollTop = lastK * rowStep();
+        });
 
         // "Portfolio" link in the first panel: smooth scroll instead of the instant anchor jump
         var link = document.querySelector('.portfolio-link');
@@ -195,6 +234,10 @@ try {
                 e.preventDefault();
                 lastDown = true;
                 if (desktop.matches) {
+                    if (window.scrollY < positions().top - TOL) {
+                        win.scrollTop = 0;
+                        lastK = 0;
+                    }
                     animateTo(positions().top, LINK_MS, 'link');
                 } else {
                     window.scrollTo({ top: portfolio.getBoundingClientRect().top + window.scrollY, behavior: reduced.matches ? 'auto' : 'smooth' });
@@ -234,7 +277,7 @@ try {
                 var zone = y > p.end + TOL && y < p.top - TOL ? 'MID' : (Math.abs(y - p.end) <= TOL ? 'end' : (Math.abs(y - p.top) <= TOL ? 'portfolio-top' : (y > p.top ? 'in-portfolio' : 'free')));
                 box.textContent = 'scrollY ' + y.toFixed(1) + '\nend    ' + p.end.toFixed(1) + '\ntop    ' + p.top.toFixed(1) +
                     '\nzone   ' + zone + '\nanim   ' + animating + '\nquiet  ' + (Date.now() < quietUntil) +
-                    '\ndown   ' + lastDown + '\nlast   ' + lastEvent;
+                    '\ndown   ' + lastDown + '\nrows   ' + (rowStep() ? (win.scrollTop / rowStep()).toFixed(2) : '-') + '/' + maxRow() + '\nlast   ' + lastEvent;
             }, 100);
         }
     }());
