@@ -209,6 +209,15 @@
         font-size: clamp(18px, 3.2vh, 34px);
     }
 
+    .portfolio-heading {
+        gap: clamp(8px, 1.6vh, 16px);
+    }
+
+    .portfolio-avatar {
+        width: clamp(26px, 4.6vh, 48px);
+        height: clamp(26px, 4.6vh, 48px);
+    }
+
     .portfolio-intro {
         margin-bottom: 0;
         font-size: clamp(12px, 1.8vh, 20px);
