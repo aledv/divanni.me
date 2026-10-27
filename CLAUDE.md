@@ -10,6 +10,7 @@ A static personal website (divanni.me) — a single-page portfolio/CV (`index.ht
 
 - `index.html` — the entire site content (about, experience, certifications, courses, education, contact). Styled with Bootstrap 4 (CDN) + Devicon (CDN) + local `css/style.css` and `css/media.css` (responsive breakpoints) and `css/animate.css`/`css/font-awesome.min.css` (vendored). `js/main.js` drives a small GSAP (TweenMax, CDN) glitch-filter animation on the contact button; jQuery is referenced but commented out/unused in current markup.
 - All third-party libraries are loaded from CDNs at runtime; only Bootstrap-era icons/fonts/animate.css are vendored locally under `css/`, `fonts/`, `img/`.
+- Fonts: Space Grotesk (headings: `.titleText`, `.textAbout`, `.tagline`, `.repo-name`...; 500/600/700) and Inter (all other text; 400/500/600) are self-hosted as WOFF2 in `fonts/Inter` and `fonts/SpaceGrotesk` (latin subset from @fontsource, SIL OFL licence copied next to them), `@font-face` with `font-display: swap` in `css/style.css`, main weights preloaded in `index.html`; no Google Fonts requests (smoke test checks). The signature keeps SINERGICA (`.signature`, weight 400). The old Helvetica Neue faces are gone.
 - Umami analytics is embedded via `<script>` tag in `index.html` pointed at `umami.divanni.me`.
 - `robots.txt` and `sitemap.xml` at the repo root support indexing; `index.html` also carries Open Graph/Twitter meta tags and a `Person` JSON-LD block.
 

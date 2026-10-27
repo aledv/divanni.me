@@ -215,6 +215,29 @@ def main():
         f"card icons in js/main.js exist ({len(icons)}){': missing ' + ', '.join(missing) if missing else ''}"
     )
 
+    # self-hosted Inter / Space Grotesk: files + OFL licences present, declared, preloaded, no Google Fonts
+    css_text = (ROOT / "css" / "style.css").read_text(encoding="utf-8")
+    font_files = {
+        "Inter": [f"fonts/Inter/Inter-{w}.woff2" for w in (400, 500, 600)],
+        "SpaceGrotesk": [f"fonts/SpaceGrotesk/SpaceGrotesk-{w}.woff2" for w in (500, 600, 700)],
+    }
+    for name, files in font_files.items():
+        absent = [f for f in files + [f"fonts/{name}/OFL.txt"] if not (ROOT / f).is_file()]
+        undeclared = [f for f in files if f"../{f}" not in css_text]
+        (fail if absent or undeclared else ok)(
+            f"{name} fonts self-hosted and declared"
+            f"{': missing ' + ', '.join(absent) if absent else ''}"
+            f"{': not in style.css ' + ', '.join(undeclared) if undeclared else ''}"
+        )
+    preloads = re.findall(r'<link rel="preload" href="(fonts/[^"]+\.woff2)"', html)
+    (ok if preloads and all((ROOT / f).is_file() for f in preloads) else fail)(
+        f"font preloads point to existing files ({len(preloads)})"
+    )
+    swap_ok = "font-display:swap" in css_text.replace(" ", "")
+    (ok if swap_ok else fail)("@font-face uses font-display: swap")
+    external = re.findall(r"(?:fonts\.googleapis|fonts\.gstatic)[^\"')\s]*", html + css_text)
+    (fail if external else ok)("no Google Fonts requests" + (f": {external[0]}" if external else ""))
+
     for block in p.jsonld:
         try:
             json.loads(block)

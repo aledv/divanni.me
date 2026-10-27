@@ -1,5 +1,5 @@
  body,html{
-    font-family:HELVETICANEUECYR-LIGHT,sans-serif
+    font-family:Inter,system-ui,sans-serif
 }
 
  .a-button a:hover,.list-text:hover{
@@ -28,13 +28,51 @@
 }
 
 @font-face{
-    font-family:HELVETICANEUECYR-BOLD;
-    src:url("../fonts/HelveticaItalic/HELVETICANEUECYR-BOLD.OTF") format("opentype")
+    font-family:Inter;
+    src:url("../fonts/Inter/Inter-400.woff2") format("woff2");
+    font-style:normal;
+    font-weight:400;
+    font-display:swap
 }
 
 @font-face{
-    font-family:HELVETICANEUECYR-LIGHT;
-    src:url("../fonts/HelveticaLight/HELVETICANEUECYR-LIGHT.OTF") format("opentype")
+    font-family:Inter;
+    src:url("../fonts/Inter/Inter-500.woff2") format("woff2");
+    font-style:normal;
+    font-weight:500;
+    font-display:swap
+}
+
+@font-face{
+    font-family:Inter;
+    src:url("../fonts/Inter/Inter-600.woff2") format("woff2");
+    font-style:normal;
+    font-weight:600;
+    font-display:swap
+}
+
+@font-face{
+    font-family:"Space Grotesk";
+    src:url("../fonts/SpaceGrotesk/SpaceGrotesk-500.woff2") format("woff2");
+    font-style:normal;
+    font-weight:500;
+    font-display:swap
+}
+
+@font-face{
+    font-family:"Space Grotesk";
+    src:url("../fonts/SpaceGrotesk/SpaceGrotesk-600.woff2") format("woff2");
+    font-style:normal;
+    font-weight:600;
+    font-display:swap
+}
+
+@font-face{
+    font-family:"Space Grotesk";
+    src:url("../fonts/SpaceGrotesk/SpaceGrotesk-700.woff2") format("woff2");
+    font-style:normal;
+    font-weight:700;
+    font-display:swap
 }
 
 ::-webkit-scrollbar{
@@ -113,7 +151,8 @@ body{
 }
 
  .B-mail,.bachelor-text,.skils,.titleText,.yers{
-     font-family:HELVETICANEUECYR-BOLD, sans-serif
+     font-family:"Space Grotesk",system-ui,sans-serif;
+    font-weight:700
 }
 
 .skill-icons{
@@ -121,7 +160,7 @@ body{
 }
 
 .workflow-list{
-    font-family:HELVETICANEUECYR-LIGHT,sans-serif;
+    font-family:Inter,system-ui,sans-serif;
     color:black
 }
 
@@ -253,16 +292,20 @@ body{
 .textAbout{
     color:#fff;
     font-size:28px;
-    font-family: HELVETICANEUECYR-BOLD, sans-serif
+    font-family:"Space Grotesk",system-ui,sans-serif;
+    font-weight:700
 }
 
 .tagline{
     display:inline-block;
+    font-family:"Space Grotesk",system-ui,sans-serif;
+    font-weight:500;
     font-size:min(1em, 3vw);
     text-wrap:balance
 }
 
 .signature{
+    font-weight:400;
     font-family: SINERGICA, sans-serif
 }
 
@@ -376,7 +419,7 @@ h2{
 
 #college,.bachelor-text{
     font-weight:700;
-    font-family: HELVETICANEUECYR-BOLD, sans-serif
+    font-family:"Space Grotesk",system-ui,sans-serif
 }
 
 .a-button:hover{
@@ -668,7 +711,8 @@ h2{
 
 .repo-stars{
     padding:2px 10px;
-    font-family:HELVETICANEUECYR-BOLD, sans-serif;
+    font-family:Inter,system-ui,sans-serif;
+    font-weight:600;
     font-size:14px;
     color:#044dd1;
     background:#e8eefc;
@@ -677,7 +721,8 @@ h2{
 
 .repo-name{
     margin:0 0 8px;
-    font-family:HELVETICANEUECYR-BOLD, sans-serif;
+    font-family:"Space Grotesk",system-ui,sans-serif;
+    font-weight:600;
     font-size:20px;
     color:#044dd1;
     overflow-wrap:anywhere
@@ -706,7 +751,8 @@ h2{
 .repo-meta{
     display:flex;
     justify-content:space-between;
-    font-family:HELVETICANEUECYR-BOLD, sans-serif;
+    font-family:Inter,system-ui,sans-serif;
+    font-weight:600;
     font-size:14px
 }
 
