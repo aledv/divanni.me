@@ -204,6 +204,17 @@ def main():
     except ValueError as e:
         fail(f"data/repos.json is invalid: {e}")
 
+    # every card icon named in js/main.js (img/lang/<name>.svg) must exist
+    icons = set(
+        re.findall(
+            r"'([a-z0-9]+-(?:original|plain)|generic)'", (ROOT / "js" / "main.js").read_text(encoding="utf-8")
+        )
+    )
+    missing = sorted(n for n in icons if not (ROOT / "img" / "lang" / f"{n}.svg").is_file())
+    (fail if missing or not icons else ok)(
+        f"card icons in js/main.js exist ({len(icons)}){': missing ' + ', '.join(missing) if missing else ''}"
+    )
+
     for block in p.jsonld:
         try:
             json.loads(block)

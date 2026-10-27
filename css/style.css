@@ -633,6 +633,12 @@ h2{
     fill:currentcolor
 }
 
+.repo-icon-wide{
+    width:80px;
+    height:auto;
+    aspect-ratio:6.4
+}
+
 .repo-stars{
     padding:2px 10px;
     font-family:HELVETICANEUECYR-BOLD, sans-serif;

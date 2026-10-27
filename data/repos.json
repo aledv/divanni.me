@@ -17,23 +17,6 @@
     "url": "https://github.com/aledv/kubernetes-ftp"
   },
   {
-    "name": "rpi5-homeserver",
-    "description": "Docker Compose setups and install scripts for a Raspberry Pi 5 home server",
-    "language": "Shell",
-    "topics": [
-      "docker-compose",
-      "home-server",
-      "homelab",
-      "infrastructure-as-code",
-      "raspberry-pi",
-      "self-hosted"
-    ],
-    "stars": 5,
-    "forks": 1,
-    "watchers": 0,
-    "url": "https://github.com/aledv/rpi5-homeserver"
-  },
-  {
     "name": "arw2jpg",
     "description": "Command-line tool to convert camera RAW files (Sony .ARW by default) to JPEG, in parallel",
     "language": "Python",
@@ -87,6 +70,24 @@
     "url": "https://github.com/aledv/cups_api_json"
   },
   {
+    "name": "divanni.me",
+    "description": "Source of my personal website divanni.me: single-page CV with a Portfolio of my GitHub projects (HTML/CSS/JS, nginx, Docker)",
+    "language": "JavaScript",
+    "topics": [
+      "css",
+      "docker",
+      "html",
+      "javascript",
+      "nginx",
+      "personal-website",
+      "portfolio"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "url": "https://github.com/aledv/divanni.me"
+  },
+  {
     "name": "notify-relay",
     "description": "Tiny self-hosted HTTP relay that forwards notifications (text, photos, videos, files) to Telegram and email",
     "language": "Python",
@@ -103,6 +104,25 @@
     "forks": 0,
     "watchers": 0,
     "url": "https://github.com/aledv/notify-relay"
+  },
+  {
+    "name": "oracle-ai-vector-lab",
+    "description": "Hands-on lab: Oracle Database 23ai/26ai AI Vector Search with local Ollama embeddings called from PL/SQL, plus Claude Code through the SQLcl MCP server",
+    "language": "Shell",
+    "topics": [
+      "claude-code",
+      "embeddings",
+      "mcp",
+      "ollama",
+      "oracle",
+      "plsql",
+      "sqlcl",
+      "vector-search"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "url": "https://github.com/aledv/oracle-ai-vector-lab"
   },
   {
     "name": "paperless-ai-classify",
@@ -123,6 +143,23 @@
     "url": "https://github.com/aledv/paperless-ai-classify"
   },
   {
+    "name": "rpi5-homeserver",
+    "description": "Docker Compose setups and install scripts for a Raspberry Pi 5 home server",
+    "language": "Shell",
+    "topics": [
+      "docker-compose",
+      "home-server",
+      "homelab",
+      "infrastructure-as-code",
+      "raspberry-pi",
+      "self-hosted"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "url": "https://github.com/aledv/rpi5-homeserver"
+  },
+  {
     "name": "sane-scan-buttons",
     "description": "Make the physical buttons of a USB scanner work again: scan to Paperless-ngx, a folder, email or a printer (SANE, Docker, Raspberry Pi)",
     "language": "Shell",
@@ -139,6 +176,23 @@
     "forks": 0,
     "watchers": 0,
     "url": "https://github.com/aledv/sane-scan-buttons"
+  },
+  {
+    "name": "transmission-telegram-bot",
+    "description": "Telegram bot to control a Transmission BitTorrent client: list, add (link/magnet), start, pause, remove, completion alerts. Maintained fork, Docker image",
+    "language": "JavaScript",
+    "topics": [
+      "bittorrent",
+      "docker",
+      "raspberry-pi",
+      "self-hosted",
+      "telegram-bot",
+      "transmission"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "url": "https://github.com/aledv/transmission-telegram-bot"
   },
   {
     "name": "yi-hack-cam-dashboard",

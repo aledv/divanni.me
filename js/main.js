@@ -18,8 +18,8 @@ try {
         var TAKE = 500;         // px before the end of the column where wheel scrolling is done by us
         var SNAP_MS = 650;      // duration of a snap
         var LINK_MS = 950;      // duration of the scroll started by the Portfolio link
-        var QUIET = 160;        // ms without wheel events that ends a gesture (trackpad inertia)
-        var QUIET_MAX = 2500;   // ms, upper bound of the inertia absorption after a snap
+        var QUIET = 250;        // ms without wheel events that ends a gesture (trackpad inertia)
+        var QUIET_MAX = 4000;   // ms, upper bound of the inertia absorption after a snap
         var animating = false;
         var rafId = 0;
         var quietUntil = 0;
@@ -95,8 +95,11 @@ try {
                     animateTo(p.end, 0, 'clamp');   // stop exactly at the end of the column: the next gesture snaps
                     return true;
                 }
-            } else if (y > p.end + TOL) {
-                animateTo(p.end, SNAP_MS, 'up');
+            } else if (y > p.end + TOL && y <= p.top + TOL) {
+                animateTo(p.end, SNAP_MS, 'up');    // from the top of the Portfolio (or from between): back to the column
+                return true;
+            } else if (y > p.top + TOL && delta > 0 && y - delta <= p.top + TOL) {
+                animateTo(p.top, 0, 'clamp-up');    // inside the Portfolio: stop exactly at its top, the next gesture snaps
                 return true;
             }
             return false;
@@ -123,6 +126,21 @@ try {
                 return;
             }
             lastEvent = 'wheel ' + Math.round(e.deltaY);
+            if (e.deltaY < 0 && desktop.matches) {
+                // same at the top of the Portfolio: scroll ourselves in its first stretch, clamped to the top
+                var q = positions();
+                var yy = window.scrollY;
+                if (yy > q.top + TOL && yy <= q.top + TAKE) {
+                    var up = Math.max(q.top, yy + wheelPixels(e));
+                    window.scrollTo({ top: up, behavior: 'auto' });
+                    lastDown = false;
+                    if (up <= q.top + 0.5) {
+                        startQuiet();
+                    }
+                    e.preventDefault();
+                    return;
+                }
+            }
             if (e.deltaY > 0 && desktop.matches) {
                 // In the last stretch of the column we scroll ourselves, clamped to the end: native scrolling
                 // (compositor, momentum) could overshoot and we would then have to move the page backwards.
@@ -200,7 +218,7 @@ try {
                 e.preventDefault();
                 return;
             }
-            if (handle(down, 0)) {
+            if (handle(down, e.key === 'ArrowDown' || e.key === 'ArrowUp' ? 40 : Math.round(window.innerHeight * 0.875))) {
                 e.preventDefault();
             }
         });
@@ -213,7 +231,7 @@ try {
             setInterval(function() {
                 var p = positions();
                 var y = window.scrollY;
-                var zone = y > p.end + TOL && y < p.top - TOL ? 'MID' : (Math.abs(y - p.end) <= TOL ? 'end' : (Math.abs(y - p.top) <= TOL ? 'portfolio' : 'free'));
+                var zone = y > p.end + TOL && y < p.top - TOL ? 'MID' : (Math.abs(y - p.end) <= TOL ? 'end' : (Math.abs(y - p.top) <= TOL ? 'portfolio-top' : (y > p.top ? 'in-portfolio' : 'free')));
                 box.textContent = 'scrollY ' + y.toFixed(1) + '\nend    ' + p.end.toFixed(1) + '\ntop    ' + p.top.toFixed(1) +
                     '\nzone   ' + zone + '\nanim   ' + animating + '\nquiet  ' + (Date.now() < quietUntil) +
                     '\ndown   ' + lastDown + '\nlast   ' + lastEvent;
@@ -274,12 +292,6 @@ function initPortfolio() {
             repos.forEach(function(repo) {
                 grid.appendChild(repoCard(repo));
             });
-            // desktop layout: the grid must fit one viewport, so it needs to know its shape (see css/media.css)
-            var cols = repos.length > 9 ? 4 : 3;
-            var rows = Math.max(1, Math.ceil(repos.length / cols));
-            grid.style.setProperty('--cols', cols);
-            grid.style.setProperty('--rows', rows);
-            grid.classList.toggle('repo-grid-compact', rows > 2);
         })
         .catch(function() {
             grid.textContent = 'Repositories unavailable, see github.com/aledv';
@@ -306,6 +318,14 @@ var LANG_IMAGES = {
     'PHP': 'php-original',
     'Dockerfile': 'docker-original'
 };
+// by repo name, wins over the language: GitHub lists oracle-ai-vector-lab as Shell
+var REPO_IMAGES = {
+    'oracle-ai-vector-lab': 'oracle-original'
+};
+// wordmarks, not square: drawn wide (the Oracle file has its viewBox cropped to the wordmark)
+var WIDE_IMAGES = {
+    'oracle-original': true
+};
 var TOPIC_IMAGES = {
     'kubernetes': 'kubernetes-plain'
 };
@@ -320,9 +340,12 @@ function repoIcon(repo) {
     var topic = topics.filter(function(t) {
         return byTopic[t];
     })[0];
-    var name = topic ? byTopic[topic] : LANG_IMAGES[repo.language] || 'generic';
+    var name = REPO_IMAGES[repo.name] || (topic ? byTopic[topic] : LANG_IMAGES[repo.language] || 'generic');
     var icon = el('img', 'repo-icon');
 
+    if (WIDE_IMAGES[name]) {
+        icon.className += ' repo-icon-wide';
+    }
     icon.src = 'img/lang/' + name + '.svg';
     icon.alt = repo.language || 'Repository';
     return icon;
