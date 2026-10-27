@@ -172,9 +172,9 @@
 
 
 
-/* Desktop: the Portfolio is one fixed viewport-high stage: heading on top, below it a window that shows two rows of
-   tiles (3x2) with equal space above and below. The window is clipped to the two rows (plus a few px for the hover
-   lift); js/main.js moves its scroll position one row at a time. */
+/* Desktop: the Portfolio header (avatar, title, subtitle) is sticky at the top while the tiles scroll natively
+   underneath; it has a white background and a short fade below it so tiles never show through. Rows are sized from
+   the viewport so that two rows fit under the header. */
 @media only screen and (min-width : 768px) {
     .portfolio {
         --vh: 100vh;
@@ -185,10 +185,7 @@
         --p: calc(var(--gap) * 0.4);
         --row: calc((var(--vh) - var(--pad) - var(--head) - 2 * var(--m) - var(--gap) - 2 * var(--p)) / 2);
 
-        box-sizing: border-box;
-        height: var(--vh);
-        padding: var(--pad) 0 0;
-        overflow: hidden;
+        padding: 0 0 calc(var(--m) + var(--p));
     }
 
     @supports (height: 100svh) {
@@ -197,7 +194,7 @@
         }
     }
 
-    /* whole pixels, so that every row step is exactly the same distance (the window scrolls by integers) */
+    /* whole pixels, so that every row has the same height */
     @supports (width: round(down, 1px, 1px)) {
         .portfolio {
             --pad: round(down, clamp(16px, 4vh, 56px), 1px);
@@ -210,16 +207,27 @@
     }
 
     .portfolio-head {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: var(--head);
+        height: calc(var(--pad) + var(--head));
+        padding: var(--pad) 0 0;
+        background: #fff;
     }
 
-    .repo-window {
-        height: calc(2 * var(--row) + var(--gap) + 2 * var(--p));
-        margin-top: var(--m);
-        overflow: hidden;
+    .portfolio-head::after {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        height: clamp(12px, 3vh, 28px);
+        pointer-events: none;
+        content: "";
+        background: linear-gradient(#fff, rgb(255 255 255 / 0%));
     }
 
     .portfolio .container {
@@ -249,6 +257,7 @@
         grid-auto-rows: var(--row);
         gap: var(--gap);
         padding: var(--p) 0;
+        margin-top: var(--m);
     }
 
     .repo-card {
@@ -259,55 +268,17 @@
     .repo-head {
         margin-bottom: clamp(4px, 1.2vh, 14px);
     }
-
-    .repo-icon {
-        width: clamp(22px, 3.6vh, 44px);
-        height: clamp(22px, 3.6vh, 44px);
-    }
-
-    .repo-icon-wide {
-        width: clamp(64px, 11vh, 120px);
-        height: auto;
-    }
-
-    .repo-stats {
-        gap: clamp(3px, 0.7vh, 6px);
-    }
-
-    .repo-stars,
-    .repo-meta {
-        font-size: clamp(11px, 1.6vh, 16px);
-    }
-
-    .repo-name {
-        margin-bottom: clamp(2px, 0.8vh, 10px);
-        font-size: clamp(14px, 2.3vh, 26px);
-    }
-
-    .repo-desc {
-        font-size: clamp(11px, 1.7vh, 18px);
-        line-height: 1.4;
-    }
-
-    .repo-topics {
-        gap: 4px;
-        margin-bottom: clamp(4px, 1.2vh, 14px);
-    }
-
-    .repo-topic {
-        padding: 0 clamp(6px, 0.8vh, 10px);
-        font-size: clamp(10px, 1.4vh, 14px);
-    }
 }
 
-/* Desktop: chevrons in the space above/below the two visible rows, shown only when there is more in that direction */
+/* Desktop: red arrow fixed at the bottom of the screen while there is more below (js/main.js toggles `hidden`) */
 @media only screen and (min-width : 768px) {
     .repo-nav {
         --nav: min(26px, calc((var(--m) + var(--p)) * 0.45));
 
-        position: absolute;
+        position: fixed;
+        bottom: calc((var(--m) + var(--p) - var(--nav)) / 2);
         left: 50%;
-        z-index: 2;
+        z-index: 4;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -321,6 +292,7 @@
         border-radius: 50%;
         box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
         transform: translateX(-50%);
+        animation: repo-nav-bob-down 1.6s ease-in-out infinite;
     }
 
     .repo-nav[hidden] {
@@ -345,16 +317,6 @@
         outline-offset: 2px;
     }
 
-    .repo-nav-down {
-        bottom: calc((var(--m) + var(--p) - var(--nav)) / 2);
-        animation: repo-nav-bob-down 1.6s ease-in-out infinite;
-    }
-
-    .repo-nav-up {
-        top: calc(var(--pad) + var(--head) + (var(--m) + var(--p) - var(--nav)) / 2);
-        animation: repo-nav-bob-up 1.6s ease-in-out infinite;
-    }
-
     @keyframes repo-nav-bob-down {
         0%,
         100% {
@@ -365,22 +327,10 @@
             transform: translate(-50%, 3px);
         }
     }
-
-    @keyframes repo-nav-bob-up {
-        0%,
-        100% {
-            transform: translate(-50%, 0);
-        }
-
-        50% {
-            transform: translate(-50%, -3px);
-        }
-    }
 }
 
 @media only screen and (min-width : 768px) and (prefers-reduced-motion: reduce) {
-    .repo-nav-down,
-    .repo-nav-up {
+    .repo-nav {
         animation: none;
     }
 }
