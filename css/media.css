@@ -173,8 +173,8 @@
 
 
 /* Desktop: the Portfolio header (avatar, title, subtitle) is sticky at the top while the tiles scroll natively
-   underneath; it has a white background and a short fade below it so tiles never show through. Rows are sized from
-   the viewport so that two rows fit under the header. */
+   underneath; it has a white background and a short fade below it so tiles never show through. Card rows have automatic
+   height (the tallest card of a row sets it, nothing overflows). */
 @media only screen and (min-width : 768px) {
     .portfolio {
         --vh: 100vh;
@@ -183,7 +183,6 @@
         --gap: clamp(10px, 2.4vh, 32px);
         --m: clamp(20px, 6vh, 64px);
         --p: calc(var(--gap) * 0.4);
-        --row: calc((var(--vh) - var(--pad) - var(--head) - 2 * var(--m) - var(--gap) - 2 * var(--p)) / 2);
 
         padding: 0 0 calc(var(--m) + var(--p));
     }
@@ -194,7 +193,7 @@
         }
     }
 
-    /* whole pixels, so that every row has the same height */
+    /* whole pixels */
     @supports (width: round(down, 1px, 1px)) {
         .portfolio {
             --pad: round(down, clamp(16px, 4vh, 56px), 1px);
@@ -202,8 +201,7 @@
             --gap: round(down, clamp(10px, 2.4vh, 32px), 1px);
             --m: round(down, clamp(20px, 6vh, 64px), 1px);
             --p: round(down, calc(var(--gap) * 0.4), 1px);
-            --row: round(down, calc((var(--vh) - var(--pad) - var(--head) - 2 * var(--m) - var(--gap) - 2 * var(--p)) / 2), 1px);
-        }
+            }
     }
 
     .portfolio-head {
@@ -254,7 +252,8 @@
 
     .repo-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-auto-rows: var(--row);
+        grid-auto-rows: auto;
+        align-items: stretch;
         gap: var(--gap);
         padding: var(--p) 0;
         margin-top: var(--m);
@@ -267,6 +266,45 @@
 
     .repo-head {
         margin-bottom: clamp(4px, 1.2vh, 14px);
+    }
+
+    .repo-icon {
+        width: clamp(22px, 3.6vh, 44px);
+        height: clamp(22px, 3.6vh, 44px);
+    }
+
+    .repo-icon-wide {
+        width: clamp(64px, 11vh, 120px);
+        height: auto;
+    }
+
+    .repo-stats {
+        gap: clamp(3px, 0.7vh, 6px);
+    }
+
+    .repo-stars,
+    .repo-meta {
+        font-size: clamp(11px, 1.6vh, 16px);
+    }
+
+    .repo-name {
+        margin-bottom: clamp(2px, 0.8vh, 10px);
+        font-size: clamp(14px, 2.3vh, 26px);
+    }
+
+    .repo-desc {
+        font-size: clamp(11px, 1.7vh, 18px);
+        line-height: 1.4;
+    }
+
+    .repo-topics {
+        gap: 4px;
+        margin-bottom: clamp(4px, 1.2vh, 14px);
+    }
+
+    .repo-topic {
+        padding: 0 clamp(6px, 0.8vh, 10px);
+        font-size: clamp(10px, 1.4vh, 14px);
     }
 }
 
