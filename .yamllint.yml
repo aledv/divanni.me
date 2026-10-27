@@ -1,0 +1,11 @@
+extends: default
+ignore: |
+  node_modules/
+rules:
+  line-length:
+    max: 120
+  # GitHub Actions uses the bare `on:` key, which yamllint would flag as a truthy value.
+  truthy:
+    check-keys: false
+  # No `---` document start marker in compose/workflow files.
+  document-start: disable

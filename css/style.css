@@ -1,0 +1,710 @@
+ body,html{
+    font-family:HELVETICANEUECYR-LIGHT,sans-serif
+}
+
+ .a-button a:hover,.list-text:hover{
+    text-decoration:none
+}
+
+@font-face{
+    font-family:HelveticaItalic;
+    src:url("../fonts/HelveticaItalic/HelveticaItalic.eot");
+    src:url("../fonts/HelveticaItalic/HelveticaItalic.eot%3F") format("embedded-opentype"),url("../fonts/HelveticaItalic/HelveticaItalic.woff") format("woff"),url("../fonts/HelveticaItalic/HelveticaItalic.ttf") format("truetype");
+    font-style:normal;
+    font-weight:400
+}
+
+@font-face{
+    font-family:HelveticaLight;
+    src:url("../fonts/HelveticaLight/HelveticaLight.eot");
+    src:url("../fonts/HelveticaLight/HelveticaLight.eot%3F") format("embedded-opentype"),url("../fonts/HelveticaLight/HelveticaLight.woff") format("woff"),url("../fonts/HelveticaLight/HelveticaLight.ttf") format("truetype");
+    font-style:normal;
+    font-weight:700
+}
+
+@font-face{
+    font-family:SINERGICA;
+    src:url("../fonts/Sinergica/Signerica_Medium.ttf") format("truetype")
+}
+
+@font-face{
+    font-family:HELVETICANEUECYR-BOLD;
+    src:url("../fonts/HelveticaItalic/HELVETICANEUECYR-BOLD.OTF") format("opentype")
+}
+
+@font-face{
+    font-family:HELVETICANEUECYR-LIGHT;
+    src:url("../fonts/HelveticaLight/HELVETICANEUECYR-LIGHT.OTF") format("opentype")
+}
+
+::-webkit-scrollbar{
+    width:0;
+    background:rgb(255 255 255 / 0%)
+}
+
+body{
+    overflow-x:hidden
+}
+
+ .safari-warning{
+    display:none;
+    color:#ff6e00
+}
+
+.safari .safari-warning{
+    display:block
+}
+
+@media screen and (max-width: 40em){
+    .codrops-header{
+        padding:2em 3vw
+    }
+
+    .codrops-header h1{
+        font-size:2.8em
+    }
+
+    .section{
+        margin:0;
+        width:100%;
+        padding:0 3vw
+    }
+}
+
+.svg-filters{
+    position:absolute;
+    visibility:hidden;
+    width:1px;
+    height:1px
+}
+
+.button--6{
+    text-transform:capitalize;
+    margin-top:10px;
+    height:50px;
+    font-size:18px;
+    background-color:transparent;
+    color:#fff;
+    border:2px solid #fff;
+    border-radius:4px;
+    padding:8px 30px;
+    -webkit-font-smoothing:antialiased;
+    display:inline-block;
+    font-weight:700;
+    text-decoration:none;
+    user-select:none;
+    letter-spacing:0.025em;
+    transition:background-color .3s ease-out;
+    transform:translateZ(0);
+    outline:90px solid transparent!important
+}
+
+.button--6:hover{
+    background-color:#fff;
+    color:#044dd1
+}
+
+.button--6:focus{
+    outline:none;
+}
+
+.safari .button,.safari .button__bg{
+    filter:none!important
+}
+
+ .B-mail,.bachelor-text,.skils,.titleText,.yers{
+     font-family:HELVETICANEUECYR-BOLD, sans-serif
+}
+
+.skill-icons{
+    font-size:22px
+}
+
+.workflow-list{
+    font-family:HELVETICANEUECYR-LIGHT,sans-serif;
+    color:black
+}
+
+.logo-avaloq,.logo-welld,.logo-tas,.logo-italmatic,.logo-oracle,.logo-microsoft,.logo-enaip,.logo-ministero,
+.logo-avaloq::after,.logo-welld::after,.logo-tas::after,.logo-italmatic::after,.logo-oracle::after,.logo-microsoft::after,.logo-enaip::after,.logo-ministero::after
+{
+ width:auto;
+ height:auto;
+ max-width:100px;
+ max-height:45px;
+}
+
+.logo-avaloq
+{
+ content:url("../img/avaloq-logo.png");
+}
+
+.logo-welld
+{
+ content:url("../img/welld-logo.png");
+}
+
+.logo-welld::after
+{
+ content:url("../img/welld-logo.png");
+ display: inline-flex;
+}
+
+.logo-tas
+{
+ content:url("../img/tas-logo.png");
+}
+
+.logo-tas::after
+{
+ content:url("../img/tas-logo.png");
+ display: inline-flex;
+}
+
+.logo-italmatic
+{
+ content:url("../img/italmatic-logo.gif");
+}
+
+.logo-italmatic::after
+{
+ content:url("../img/italmatic-logo.gif");
+ display: inline-flex;
+}
+
+.logo-oracle
+{
+ content:url("../img/oracle-logo.gif");
+}
+
+.logo-oracle::after
+{
+ content:url("../img/oracle-logo.gif");
+ display: inline-flex;
+}
+
+.logo-microsoft
+{
+ content:url("../img/microsoft-logo.png");
+}
+
+.logo-microsoft::after
+{
+ content:url("../img/microsoft-logo.png");
+ display: inline-flex;
+}
+
+.logo-enaip
+{
+ content:url("../img/enaip-logo.svg");
+}
+
+.logo-enaip::after
+{
+ content:url("../img/enaip-logo.svg");
+ display: inline-flex;
+}
+
+.logo-ministero
+{
+ content:url("../img/ministero-istruzione-logo.png");
+}
+
+.logo-ministero::after
+{
+ content:url("../img/ministero-istruzione-logo.png");
+ display: inline-flex;
+}
+
+.split{
+    display:flex;
+    align-items:flex-start
+}
+
+.header-left{
+    position:sticky;
+    top:0;
+    flex:none;
+    width:50%;
+    background-image:url("../img/left-background.jpg");
+    height:100vh;
+    min-height:600px;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+.cont,.main{
+    height:100%
+}
+
+.cont{
+    width:100%
+}
+
+.divImg{
+    margin:auto;
+    padding-bottom: 30px;
+}
+
+.main{
+    display:flex
+}
+
+.textAbout{
+    color:#fff;
+    font-size:28px;
+    font-family: HELVETICANEUECYR-BOLD, sans-serif
+}
+
+.signature{
+    font-family: SINERGICA, sans-serif
+}
+
+.B-mail{
+    margin-top:10px;
+    height:50px;
+    font-size:18px;
+    background-color:transparent;
+    color:#fff;
+    border:2px solid #fff;
+    border-radius:4px;
+    padding:8px 30px
+}
+
+.icons,.icons a{
+    color:#fff
+}
+
+.B-mail i{
+    font-size:22px
+}
+
+i{
+    padding-left:10px
+}
+
+.icons{
+    position:absolute;
+    left:0;
+    right:0;
+    margin-top:35px;
+     padding-left: 15px
+}
+
+.icons a:hover{
+    color:rgb(7 178 252 / 84%)
+}
+
+.titleText,li{
+    color:#044dd1
+}
+
+.header-right{
+    width:50%;
+    padding-left:40px;
+    padding-bottom:80px;
+    min-height:600px;
+    letter-spacing: 0.025em;
+    line-height: 1.6;
+}
+
+.text-cen{
+  margin-top:-1px
+}
+
+.titleText{
+    text-align:right;
+    width:109px;
+    margin-top:-2px;
+    text-transform:uppercase;
+  transform:rotateY(180deg);
+}
+
+.cont-2,.row-2{
+    width:100%
+}
+
+.text-about-me{
+    padding-right:8%;
+    text-align:left
+}
+
+.cont-2{
+    margin-top:80px
+}
+
+.div-text{
+    width:78%;
+    font-size:16px;
+    margin-top:-3px;
+    padding-left:30px
+}
+
+.skils{
+    margin-left:-20px;
+    margin-top: 25px;
+}
+
+li{
+    padding-bottom:5px
+}
+
+li span{
+    color:#000;
+    font-weight:700
+}
+
+h2{
+    text-align:center
+}
+
+.a-button{
+    border:none;
+    outline:0;
+    background-color:rgb(92 184 92 / 84%);
+    display:block;
+    float:right;
+    padding:4px 12px;
+    border-radius:7px
+}
+
+#college,.bachelor-text{
+    font-weight:700;
+    font-family: HELVETICANEUECYR-BOLD, sans-serif
+}
+
+.a-button:hover{
+    background-color:rgb(104 197 104 / 84%);
+    transform:scale(1.2);
+    transition:all .3s ease
+}
+
+.a-button:active{
+    background-color:rgb(85 170 85 / 84%)
+}
+
+.a-button a:hover,.a-button a:visited{
+    color:#fff
+}
+
+@keyframes swing{
+    15%{
+        transform:translateX(9px)
+    }
+
+    30%{
+        transform:translateX(-9px)
+    }
+
+    40%{
+        transform:translateX(6px)
+    }
+
+    50%{
+        transform:translateX(-6px)
+    }
+
+    65%{
+        transform:translateX(3px)
+    }
+
+    100%{
+        transform:translateX(0)
+    }
+}
+
+@keyframes swing{
+    15%{
+        transform:translateX(9px)
+    }
+
+    30%{
+        transform:translateX(-9px)
+    }
+
+    40%{
+        transform:translateX(6px)
+    }
+
+    50%{
+        transform:translateX(-6px)
+    }
+
+    65%{
+        transform:translateX(3px);
+    }
+
+    100%{
+        transform:translateX(0)
+    }
+}
+
+.yers{
+    text-align:right;
+    font-weight:700
+}
+
+.entry{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:start
+}
+
+.entry>.bachelor-text>a{
+    display:block
+}
+
+.entry>.software-text,.entry>.edu-label{
+    grid-column:1 / -1
+}
+
+.software-text{
+    text-align:left;
+    padding-top:6px;
+    padding-bottom:25px
+}
+
+.edu-label{
+    padding-top:6px
+}
+
+.div-small{
+    width:70%
+}
+
+#college{
+    text-align:left
+}
+
+.img{
+    width:376px;
+    height:423px;
+    background-size:cover;
+    margin:0 auto;
+    background-image:url("../img/image.png")
+}
+
+.qrcode{
+    width:180px;
+    height:180px;
+    background-size:cover;
+    margin:0 auto;
+}
+
+.icons a{
+    padding-right:15px;
+    opacity:1
+}
+
+.icons a img:hover{
+    transform:scale(1.2)
+}
+
+ .button--6 .message:hover{
+     color: #337ab7;
+}
+
+ .face{
+     padding-left: 4px;
+}
+
+ .iconlink{
+     height:32px;
+     width:auto;
+}
+
+ .OPL{
+     display: inline-block;
+     position: fixed;
+     left: 0;
+     top: 40px;
+     z-index: 999999;
+     width: 73px;
+     height: 41px;
+}
+
+.portfolio-link{
+    display:inline-block;
+    margin-top:18px;
+    font-size:18px;
+    color:#fff;
+    text-transform:uppercase;
+    letter-spacing:0.1em
+}
+
+.portfolio-link:hover{
+    color:rgb(7 178 252 / 84%);
+    text-decoration:none
+}
+
+.portfolio{
+    position:relative;
+    padding:80px 0;
+    letter-spacing:0.025em;
+    line-height:1.6;
+    border-top:1px solid #e3e8f5
+}
+
+.particles-portfolio{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
+    pointer-events:none
+}
+
+.portfolio .container{
+    position:relative;
+    z-index:1
+}
+
+.portfolio-title{
+    width:auto;
+    text-align:center;
+    transform:none;
+    font-size:24px
+}
+
+.portfolio-intro{
+    text-align:center;
+    margin-bottom:40px
+}
+
+.repo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+    gap:24px
+}
+
+.repo-card{
+    display:flex;
+    flex-direction:column;
+    padding:22px;
+    color:#000;
+    background:#fff;
+    border:1px solid #d5def5;
+    border-top:4px solid #044dd1;
+    border-radius:6px;
+    box-shadow:0 2px 10px rgb(4 77 209 / 8%);
+    transition:transform .25s ease, box-shadow .25s ease
+}
+
+.repo-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 26px rgb(4 77 209 / 22%);
+    color:#000;
+    text-decoration:none
+}
+
+.repo-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px
+}
+
+.repo-icon{
+    width:34px;
+    height:34px
+}
+
+.repo-stats{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    gap:6px
+}
+
+.repo-stat{
+    display:inline-flex;
+    align-items:center;
+    gap:4px
+}
+
+.repo-stat svg{
+    width:1em;
+    height:1em;
+    fill:currentcolor
+}
+
+.repo-stars{
+    padding:2px 10px;
+    font-family:HELVETICANEUECYR-BOLD, sans-serif;
+    font-size:14px;
+    color:#044dd1;
+    background:#e8eefc;
+    border-radius:20px
+}
+
+.repo-name{
+    margin:0 0 8px;
+    font-family:HELVETICANEUECYR-BOLD, sans-serif;
+    font-size:20px;
+    color:#044dd1;
+    overflow-wrap:anywhere
+}
+
+.repo-desc{
+    flex:1;
+    font-size:15px
+}
+
+.repo-topics{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:14px
+}
+
+.repo-topic{
+    padding:0 10px;
+    font-size:12px;
+    color:#044dd1;
+    border:1px solid #c3d1f5;
+    border-radius:20px
+}
+
+.repo-meta{
+    display:flex;
+    justify-content:space-between;
+    font-family:HELVETICANEUECYR-BOLD, sans-serif;
+    font-size:14px
+}
+
+.repo-link{
+    display:inline-flex;
+    color:#044dd1
+}
+
+.repo-link svg{
+    width:1.5em;
+    height:1.5em;
+    fill:currentcolor
+}
+
+.repo-card:hover .repo-link,
+.repo-card:focus-visible .repo-link{
+    color:#022a73
+}
+
+.repo-card:focus-visible{
+    outline:2px solid #044dd1;
+    outline-offset:2px
+}
+
+.github-mark{
+    display:inline-block;
+    border-radius:3px
+}
+
+.github-mark svg{
+    width:1.2em;
+    height:1.2em;
+    vertical-align:-0.2em;
+    fill:currentcolor
+}
+
+.github-mark:focus-visible{
+    outline:2px solid #044dd1;
+    outline-offset:2px
+}

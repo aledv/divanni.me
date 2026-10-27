@@ -1,0 +1,8 @@
+# Local test of the production image: ./build.sh --force && docker compose up -d, then http://localhost:8102
+services:
+  divanni:
+    image: divanni.me
+    container_name: divanni.me
+    restart: unless-stopped
+    ports:
+      - "8102:80"

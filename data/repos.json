@@ -1,0 +1,162 @@
+[
+  {
+    "name": "kubernetes-ftp",
+    "description": "Minimal example of an FTP server (vsftpd) on Kubernetes: PV/PVC, Deployment, NodePort with passive mode, documented pitfalls",
+    "language": "",
+    "topics": [
+      "example",
+      "ftp",
+      "k3s",
+      "k8s",
+      "kubernetes",
+      "vsftpd"
+    ],
+    "stars": 45,
+    "forks": 54,
+    "watchers": 2,
+    "url": "https://github.com/aledv/kubernetes-ftp"
+  },
+  {
+    "name": "rpi5-homeserver",
+    "description": "Docker Compose setups and install scripts for a Raspberry Pi 5 home server",
+    "language": "Shell",
+    "topics": [
+      "docker-compose",
+      "home-server",
+      "homelab",
+      "infrastructure-as-code",
+      "raspberry-pi",
+      "self-hosted"
+    ],
+    "stars": 5,
+    "forks": 1,
+    "watchers": 0,
+    "url": "https://github.com/aledv/rpi5-homeserver"
+  },
+  {
+    "name": "arw2jpg",
+    "description": "Command-line tool to convert camera RAW files (Sony .ARW by default) to JPEG, in parallel",
+    "language": "Python",
+    "topics": [
+      "arw",
+      "cli",
+      "jpeg",
+      "photography",
+      "python",
+      "raw",
+      "rawpy"
+    ],
+    "stars": 1,
+    "forks": 1,
+    "watchers": 1,
+    "url": "https://github.com/aledv/arw2jpg"
+  },
+  {
+    "name": "hp-150nw-monitor",
+    "description": "Tiny REST API that reads status and toner levels of an HP Color Laser 150nw printer as JSON (for Homepage and other dashboards)",
+    "language": "Python",
+    "topics": [
+      "docker",
+      "fastapi",
+      "homelab",
+      "homepage",
+      "hp",
+      "printer",
+      "toner"
+    ],
+    "stars": 1,
+    "forks": 0,
+    "watchers": 0,
+    "url": "https://github.com/aledv/hp-150nw-monitor"
+  },
+  {
+    "name": "cups_api_json",
+    "description": "Tiny REST API that reports the state of a local CUPS print server as JSON (default printer, status, job counts)",
+    "language": "Python",
+    "topics": [
+      "cups",
+      "docker",
+      "flask",
+      "homelab",
+      "printing",
+      "rest-api"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 1,
+    "url": "https://github.com/aledv/cups_api_json"
+  },
+  {
+    "name": "notify-relay",
+    "description": "Tiny self-hosted HTTP relay that forwards notifications (text, photos, videos, files) to Telegram and email",
+    "language": "Python",
+    "topics": [
+      "docker",
+      "fastapi",
+      "homelab",
+      "notifications",
+      "self-hosted",
+      "smtp",
+      "telegram"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "url": "https://github.com/aledv/notify-relay"
+  },
+  {
+    "name": "paperless-ai-classify",
+    "description": "Classify Paperless-ngx documents with a local LLM (Ollama): document type, title and correspondent, conservatively, overnight",
+    "language": "Python",
+    "topics": [
+      "document-management",
+      "homelab",
+      "llm",
+      "local-ai",
+      "ollama",
+      "paperless-ngx",
+      "self-hosted"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "url": "https://github.com/aledv/paperless-ai-classify"
+  },
+  {
+    "name": "sane-scan-buttons",
+    "description": "Make the physical buttons of a USB scanner work again: scan to Paperless-ngx, a folder, email or a printer (SANE, Docker, Raspberry Pi)",
+    "language": "Shell",
+    "topics": [
+      "homelab",
+      "nextcloud",
+      "paperless-ngx",
+      "raspberry-pi",
+      "sane",
+      "scanner",
+      "self-hosted"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "url": "https://github.com/aledv/sane-scan-buttons"
+  },
+  {
+    "name": "yi-hack-cam-dashboard",
+    "description": "Lightweight self-hosted dashboard for yi-hack cameras: live grid (MediaMTX), recordings, motion events, Telegram/ntfy notifications. EN/IT.",
+    "language": "Python",
+    "topics": [
+      "fastapi",
+      "home-security",
+      "htmx",
+      "mediamtx",
+      "raspberry-pi",
+      "self-hosted",
+      "yi-camera",
+      "yi-hack"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "url": "https://github.com/aledv/yi-hack-cam-dashboard"
+  }
+]
