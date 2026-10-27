@@ -56,6 +56,10 @@
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 767px) {
+    .tagline {
+        font-size: min(1em, 5.6vw);
+    }
+
     .split {
         display: block;
     }

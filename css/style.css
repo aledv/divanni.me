@@ -256,6 +256,12 @@ body{
     font-family: HELVETICANEUECYR-BOLD, sans-serif
 }
 
+.tagline{
+    display:inline-block;
+    font-size:min(1em, 3vw);
+    text-wrap:balance
+}
+
 .signature{
     font-family: SINERGICA, sans-serif
 }
