@@ -633,7 +633,7 @@ h2{
 }
 
 .portfolio{
-    --foot:52px;
+    --foot:calc(52px + env(safe-area-inset-bottom, 0px));
 
     position:relative;
     padding:80px 0 calc(80px + var(--foot));
@@ -853,11 +853,24 @@ h2{
     align-items:center;
     justify-content:center;
     gap:28px;
-    height:52px;
-    background:linear-gradient(to top, rgb(255 255 255 / 94%) 70%, rgb(255 255 255 / 0%));
+    height:calc(52px + env(safe-area-inset-bottom, 0px));
+    padding-bottom:env(safe-area-inset-bottom, 0px);
+    background:rgb(255 255 255 / 94%);
     opacity:0;
     visibility:hidden;
     transition:opacity 0.25s ease, visibility 0.25s
+}
+
+/* the fade towards the tiles sits above the band, so the icons are centred in the opaque part */
+.portfolio-footer::before{
+    content:"";
+    position:absolute;
+    right:0;
+    bottom:100%;
+    left:0;
+    height:16px;
+    background:linear-gradient(to top, rgb(255 255 255 / 94%), rgb(255 255 255 / 0%));
+    pointer-events:none
 }
 
 .portfolio-footer.is-visible{
