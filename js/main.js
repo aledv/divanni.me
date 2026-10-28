@@ -3,68 +3,27 @@
  */
 /* global gsap -- loaded from the jsDelivr CDN in index.html before this script */
 
-// Portfolio, desktop only: scrolling is always native. This block only (a) shows the red "more projects" arrow
-// while there is more below and hides it at the end of the page, (b) scrolls one row of cards smoothly when the
-// arrow is clicked and (c) scrolls smoothly to the Portfolio when the "Portfolio" link in the first panel is
-// clicked. Nothing here listens to wheel or key events or moves the page by itself.
+// Scrolling is always native. The only script here: smooth scroll to the Portfolio when the "Portfolio" link in
+// the first panel is clicked. Nothing listens to wheel or key events or moves the page by itself.
 try {
     (function() {
-        var desktop = window.matchMedia('(min-width: 768px)');
-        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
         var portfolio = document.getElementById('portfolio');
-        var nav = document.getElementById('repo-down');
-        var TOL = 4;    // px
+        var link = document.querySelector('.portfolio-link');
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-        if (!portfolio) {
+        if (!portfolio || !link) {
             return;
         }
-
-        function behavior() {
-            return reduced.matches ? 'auto' : 'smooth';
-        }
-
-        // distance between two rows of cards (3 per row)
-        function rowStep() {
-            var cards = portfolio.querySelectorAll('.repo-card');
-            return cards.length > 3 ? cards[3].offsetTop - cards[0].offsetTop : 0;
-        }
-
-        // visible from the moment the Portfolio fills the screen until the end of the page
-        function updateNav() {
-            if (!nav) {
+        link.addEventListener('click', function(e) {
+            if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) {
                 return;
             }
-            var r = portfolio.getBoundingClientRect();
-            nav.hidden = !desktop.matches || r.top > window.innerHeight * 0.5 || r.bottom <= window.innerHeight + TOL;
-        }
-
-        if (nav) {
-            nav.addEventListener('click', function() {
-                var step = rowStep();
-                if (step) {
-                    window.scrollBy({ top: step, behavior: behavior() });
-                }
-            });
-            window.addEventListener('scroll', updateNav, { passive: true });
-            window.addEventListener('resize', updateNav);
-            updateNav();
-            // the cards arrive after fetch(): the page height changes
-            new MutationObserver(updateNav).observe(document.getElementById('repo-grid'), { childList: true });
-        }
-
-        var link = document.querySelector('.portfolio-link');
-        if (link) {
-            link.addEventListener('click', function(e) {
-                if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) {
-                    return;
-                }
-                e.preventDefault();
-                window.scrollTo({ top: portfolio.getBoundingClientRect().top + window.scrollY, behavior: behavior() });
-                if (window.location.hash !== '#portfolio') {
-                    history.pushState(null, '', '#portfolio');
-                }
-            });
-        }
+            e.preventDefault();
+            window.scrollTo({ top: portfolio.getBoundingClientRect().top + window.scrollY, behavior: reduced.matches ? 'auto' : 'smooth' });
+            if (window.location.hash !== '#portfolio') {
+                history.pushState(null, '', '#portfolio');
+            }
+        });
     }());
 } catch {
     // the page works without it

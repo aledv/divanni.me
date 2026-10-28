@@ -215,14 +215,14 @@ def main():
         f"card icons in js/main.js exist ({len(icons)}){': missing ' + ', '.join(missing) if missing else ''}"
     )
 
-    # Portfolio: native scrolling, sticky header, only the down arrow (no snap window, no up arrow)
+    # Portfolio: native scrolling, sticky header, no arrows (no snap window)
     main_js = (ROOT / "js" / "main.js").read_text(encoding="utf-8")
-    legacy = [x for x in ("repo-window", "repo-up", "'wheel'", "'keydown'") if x in main_js]
-    legacy += [x for x in ("repo-window", "repo-up") if x in html]
+    legacy = [x for x in ("repo-window", "repo-up", "repo-down", "'wheel'", "'keydown'") if x in main_js]
+    legacy += [x for x in ("repo-window", "repo-up", "repo-down") if x in html]
     (fail if legacy else ok)("no scroll automation left" + (f": found {', '.join(legacy)}" if legacy else ""))
     media_css = (ROOT / "css" / "media.css").read_text(encoding="utf-8")
-    sticky = "position: sticky" in media_css and 'id="repo-down"' in html
-    (ok if sticky else fail)("Portfolio sticky header and down arrow present")
+    sticky = "position: sticky" in media_css and "repo-nav" not in html + media_css
+    (ok if sticky else fail)("Portfolio sticky header present, no scroll arrow")
 
     # self-hosted Inter / Space Grotesk: files + OFL licences present, declared, preloaded, no Google Fonts
     css_text = (ROOT / "css" / "style.css").read_text(encoding="utf-8")
