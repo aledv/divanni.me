@@ -385,7 +385,8 @@ i{
     --s4:32px;
 
     width:50%;
-    padding-left:40px;
+    padding-right:25px;
+    padding-left:25px;
     padding-bottom:var(--s4);
     min-height:600px;
     letter-spacing: 0.025em;

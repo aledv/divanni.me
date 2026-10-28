@@ -62,6 +62,23 @@
 
     .header-right {
         width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    /* full-bleed row (the container pads 15px each side, the row pulls out by 15px and the columns pad 15px again) */
+    .header-right .row-2 {
+        width: auto;
+    }
+
+    .row-2 > .div-text,
+    .row-2 > .div-small,
+    .row-2 .software-text {
+        width: 100%;
+    }
+
+    .row-2 > .text-about-me {
+        padding-right: 15px;
     }
 }
 
