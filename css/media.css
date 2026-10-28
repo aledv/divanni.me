@@ -213,6 +213,20 @@
         padding: var(--pad) 0 0;
     }
 
+    /* a soft white cloud behind avatar, title and subtitle hides the particles there */
+    .portfolio-head::before {
+        position: absolute;
+        top: 0;
+        bottom: -24px;
+        left: 50%;
+        z-index: -1;
+        width: min(640px, 100%);
+        pointer-events: none;
+        content: "";
+        background: radial-gradient(closest-side, #fff 60%, rgb(255 255 255 / 0%));
+        transform: translateX(-50%);
+    }
+
     .portfolio .container {
         max-width: min(1400px, 92vw);
     }

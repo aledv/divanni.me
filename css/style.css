@@ -860,6 +860,20 @@ h2{
     transition:opacity 0.25s ease, visibility 0.25s
 }
 
+/* a soft white cloud behind the icons hides the particles there (no hard edge, nothing outside the band) */
+.portfolio-footer::before{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:50%;
+    z-index:-1;
+    width:min(560px, 100%);
+    transform:translateX(-50%);
+    background:radial-gradient(closest-side, #fff 60%, rgb(255 255 255 / 0%));
+    pointer-events:none
+}
+
 .portfolio-footer.is-visible{
     opacity:1;
     visibility:visible
