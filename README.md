@@ -95,4 +95,4 @@ The code (HTML structure, CSS, JavaScript, tools, configuration) is MIT licensed
 [LICENSE](LICENSE). The content (texts, CV, photos and avatar) is mine and not covered by the
 license. Company and institution logos belong to their owners. Third-party files keep their own
 licenses: tsParticles (MIT, `js/vendor/tsparticles.LICENSE`), Font Awesome fonts (SIL OFL 1.1),
-animate.css (MIT), Simple Icons (CC0) and Heroicons (MIT, the envelope), `img/icons/brand-*.svg`, footer, Bootstrap and Devicon (MIT, loaded from CDNs).
+animate.css (MIT), Simple Icons (CC0) and Lucide (ISC, the envelope), `img/icons/brand-*.svg`, footer, Bootstrap and Devicon (MIT, loaded from CDNs).
