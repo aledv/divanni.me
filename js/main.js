@@ -41,6 +41,42 @@ try {
         new IntersectionObserver(function(entries) {
             footer.classList.toggle('is-visible', entries[0].isIntersecting);
         }, { rootMargin: '0px 0px -50% 0px' }).observe(portfolio);
+
+        // Desktop: when the Portfolio is scrolled to its start, the footer fills the space between the last fully
+        // visible row of tiles and the bottom of the window (min 52px, max 160px), icons centred in it.
+        var root = document.documentElement;
+        var desktop = window.matchMedia('(min-width: 768px)');
+
+        function syncFooterHeight() {
+            if (!desktop.matches) {
+                root.style.removeProperty('--foot-h');
+                return;
+            }
+            var cards = portfolio.querySelectorAll('.repo-card');
+            if (!cards.length) {
+                return;
+            }
+            var viewport = window.innerHeight;
+            var start = portfolio.getBoundingClientRect().top + window.scrollY;
+            var last = null;
+            cards.forEach(function(card) {
+                var bottom = card.getBoundingClientRect().bottom + window.scrollY - start;
+                if (bottom <= viewport && (last === null || bottom > last)) {
+                    last = bottom;
+                }
+            });
+            var height = last === null ? 52 : Math.round(Math.min(160, Math.max(52, viewport - last)));
+            if (root.style.getPropertyValue('--foot-h') !== height + 'px') {
+                root.style.setProperty('--foot-h', height + 'px');
+            }
+        }
+
+        syncFooterHeight();
+        window.addEventListener('resize', syncFooterHeight);
+        window.addEventListener('load', syncFooterHeight);
+        if ('ResizeObserver' in window) {
+            new ResizeObserver(syncFooterHeight).observe(portfolio);
+        }
     }());
 } catch {
     // the page works without it
