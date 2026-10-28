@@ -290,3 +290,32 @@
         font-size: clamp(10px, 1.4vh, 14px);
     }
 }
+
+/* Tablets and desktops: the section labels (mirrored, on the left) sit in one column as wide as the longest one
+   (CERTIFICATION) plus a gap, and the content of every section starts at the same x and uses all the remaining width. */
+@media only screen and (min-width : 768px) {
+    .header-right .row-2 {
+        display: grid;
+        grid-template-columns: 7.3em minmax(0, 1fr);
+        column-gap: var(--s4);
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .row-2 > [class*="col-"] {
+        flex: none;
+        width: auto;
+        max-width: none;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .row-2 > .div-text,
+    .row-2 > .div-small {
+        width: auto;
+    }
+
+    .row-2 .software-text {
+        width: auto;
+    }
+}

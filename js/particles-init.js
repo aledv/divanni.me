@@ -17,7 +17,7 @@
     // started once the tiles exist: the section can be taller than the window, the dots follow its area
     function start() {
         var area = section.offsetWidth * section.offsetHeight;
-        var count = Math.max(60, Math.min(400, Math.round(area / 9000)));
+        var count = Math.max(120, Math.min(800, Math.round(area / 4500)));
         var options = {
             fullScreen: { enable: false },
             fpsLimit: 40,
@@ -25,9 +25,9 @@
             background: { color: 'transparent' },
             particles: {
                 number: { value: count, density: { enable: false } },
-                paint: { color: { value: '#044dd1' }, fill: { enable: true, opacity: 0.7 } },
+                paint: { color: { value: '#044dd1' }, fill: { enable: true, opacity: 0.8 } },
                 size: { value: { min: 2, max: 4 } },
-                links: { enable: true, distance: 110, color: '#044dd1', opacity: 0.3, width: 1.2 },
+                links: { enable: true, distance: 110, color: '#044dd1', opacity: 0.45, width: 1.2 },
                 move: { enable: true, speed: 0.5, outModes: { default: 'bounce' } }
             },
             interactivity: {
