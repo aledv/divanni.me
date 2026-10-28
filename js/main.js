@@ -40,6 +40,7 @@ try {
         }
         new IntersectionObserver(function(entries) {
             footer.classList.toggle('is-visible', entries[0].isIntersecting);
+            syncMask();
         }, { rootMargin: '0px 0px -50% 0px' }).observe(portfolio);
 
         // Desktop: when the Portfolio is scrolled to its start, the footer fills the space between the last fully
@@ -69,7 +70,41 @@ try {
             if (root.style.getPropertyValue('--foot-h') !== height + 'px') {
                 root.style.setProperty('--foot-h', height + 'px');
             }
+            syncMask();
         }
+
+        // Header and footer are transparent (the particles show through): the tiles are masked out of the header and
+        // footer zones, with a short fade, by a mask on their container. It is in the container's own coordinates, so
+        // it is recomputed on every scroll.
+        var container = portfolio.querySelector('.container');
+        var head = portfolio.querySelector('.portfolio-head');
+        var FADE = 14;
+
+        function syncMask() {
+            if (!container) {
+                return;
+            }
+            var box = container.getBoundingClientRect();
+            var top = desktop.matches && head ? head.getBoundingClientRect().bottom - box.top : 0;
+            var bottom = footer.classList.contains('is-visible') ? footer.getBoundingClientRect().top - box.top : box.height;
+            var stops = [];
+            if (top > 0) {
+                stops.push('transparent 0', 'transparent ' + top + 'px', '#000 ' + (top + FADE) + 'px');
+            } else {
+                stops.push('#000 0');
+            }
+            if (bottom < box.height) {
+                stops.push('#000 ' + (bottom - FADE) + 'px', 'transparent ' + bottom + 'px', 'transparent 100%');
+            } else {
+                stops.push('#000 100%');
+            }
+            var value = top > 0 || bottom < box.height ? 'linear-gradient(to bottom, ' + stops.join(', ') + ')' : 'none';
+            container.style.webkitMaskImage = value;
+            container.style.maskImage = value;
+        }
+
+        window.addEventListener('scroll', syncMask, { passive: true });
+        window.addEventListener('resize', syncMask);
 
         syncFooterHeight();
         window.addEventListener('resize', syncFooterHeight);

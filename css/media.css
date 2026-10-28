@@ -169,7 +169,8 @@
 
 
 /* Desktop: the Portfolio header (avatar, title, subtitle) is sticky at the top while the tiles scroll natively
-   underneath; it has a white background and a short fade below it so tiles never show through. Card rows have automatic
+   underneath; it is transparent (the particles show through) and js/main.js masks the tiles out of the header and
+   footer zones. Card rows have automatic
    height (the tallest card of a row sets it, nothing overflows). */
 @media only screen and (min-width : 768px) {
     .portfolio {
@@ -210,18 +211,6 @@
         justify-content: center;
         height: calc(var(--pad) + var(--head));
         padding: var(--pad) 0 0;
-        background: #fff;
-    }
-
-    .portfolio-head::after {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        left: 0;
-        height: clamp(12px, 3vh, 28px);
-        pointer-events: none;
-        content: "";
-        background: linear-gradient(#fff, rgb(255 255 255 / 0%));
     }
 
     .portfolio .container {
