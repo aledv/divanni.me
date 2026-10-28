@@ -633,7 +633,7 @@ h2{
 }
 
 .portfolio{
-    --foot:calc(52px + env(safe-area-inset-bottom, 0px));
+    --foot:calc(52px + env(safe-area-inset-bottom, 0));
 
     position:relative;
     padding:80px 0 calc(80px + var(--foot));
@@ -853,8 +853,8 @@ h2{
     align-items:center;
     justify-content:center;
     gap:28px;
-    height:calc(52px + env(safe-area-inset-bottom, 0px));
-    padding-bottom:env(safe-area-inset-bottom, 0px);
+    height:calc(52px + env(safe-area-inset-bottom, 0));
+    padding-bottom:env(safe-area-inset-bottom, 0);
     background:rgb(255 255 255 / 94%);
     opacity:0;
     visibility:hidden;
