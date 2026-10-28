@@ -2,14 +2,6 @@
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
-    .cont-2{
-        margin-top: 50px;
-    }
-
-    .header-right{
-        padding-bottom: 50px;
-    }
-
     .div-small {
         width: 74%;
     }
@@ -36,21 +28,17 @@
     }
 
     .titleText {
-        padding-bottom: 23px;
+        padding-bottom: var(--s2);
         width: 100%;
     }
 
     .skils {
         margin-left: -25px;
-        padding-top: 20px;
-    }
-
-    .cont-2 {
-        margin-top: 40px;
+        padding-top: var(--s2);
     }
 
     .header-right{
-        padding-bottom: 40px;
+        --s4: 24px;
     }
 }
 
