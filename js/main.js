@@ -94,7 +94,7 @@ try {
                 stops.push('#000 0');
             }
             if (bottom < box.height) {
-                stops.push('#000 ' + (bottom - FADE) + 'px', 'transparent ' + bottom + 'px', 'transparent 100%');
+                stops.push('#000 ' + bottom + 'px', 'transparent ' + (bottom + FADE) + 'px', 'transparent 100%');
             } else {
                 stops.push('#000 100%');
             }
