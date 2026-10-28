@@ -72,24 +72,6 @@
         min-height: 0;
     }
 
-    /* icons in the normal flow so the whole block is centered vertically */
-    .icons {
-        position: static;
-        padding-left: 0;
-    }
-
-    .icons a:last-child {
-        padding-right: 0;
-    }
-
-    .divImg {
-        padding-bottom: 0;
-    }
-
-    .divImg > br:last-child {
-        display: none;
-    }
-
     .header-right {
         width: 100%;
     }
@@ -115,8 +97,10 @@
     }
 
     .img {
-        width: 250px;
-        height: 250px;
+        --img: 250px;
+
+        width: var(--img);
+        height: var(--img);
     }
 
     .fa-lg{
@@ -130,8 +114,10 @@
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
     .img {
-        width: 250px;
-        height: 250px;
+        --img: 250px;
+
+        width: var(--img);
+        height: var(--img);
     }
 
 }
@@ -145,36 +131,33 @@
     }
 
     .img {
-        width: clamp(90px, calc(100svh - 340px), 250px);
-        height: clamp(90px, calc(100svh - 340px), 250px);
+        --img: clamp(90px, calc(100svh - 340px), 250px);
+
+        width: var(--img);
+        height: var(--img);
     }
 }
 
 /* Short phone viewports (browser bars visible): tighter spacing */
 @media only screen and (max-width : 767px) and (max-height : 740px) {
-    .divImg {
-        padding-bottom: 0;
-    }
-
     .textAbout {
         font-size: 24px;
-    }
-
-    .icons {
-        margin-top: 20px;
-    }
-
-    .portfolio-link {
-        margin-top: 8px;
     }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
+    /* the script font sits lower in the line box on desktop engines */
+    .signature {
+        margin: 0.29em 0 -0.32em;
+    }
+
     /* 305px, shrinking on low windows (the rest of the first panel needs ~370px) so the social icons stay inside it */
     .img {
-        width: clamp(120px, calc(100vh - 373px), 305px);
-        height: clamp(120px, calc(100vh - 373px), 305px);
+        --img: clamp(120px, calc(100vh - 373px), 305px);
+
+        width: var(--img);
+        height: var(--img);
     }
 }
 
@@ -249,8 +232,10 @@
     }
 
     .portfolio-avatar {
-        width: clamp(26px, 4.6vh, 48px);
-        height: clamp(26px, 4.6vh, 48px);
+        --img: clamp(26px, 4.6vh, 48px);
+
+        width: var(--img);
+        height: var(--img);
     }
 
     .portfolio-intro {
@@ -277,8 +262,10 @@
     }
 
     .repo-icon {
-        width: clamp(22px, 3.6vh, 44px);
-        height: clamp(22px, 3.6vh, 44px);
+        --img: clamp(22px, 3.6vh, 44px);
+
+        width: var(--img);
+        height: var(--img);
     }
 
     .repo-icon-wide {

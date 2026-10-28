@@ -118,7 +118,7 @@ body{
 
 .button--6{
     text-transform:capitalize;
-    margin-top:10px;
+    margin-top:0;
     height:50px;
     font-size:18px;
     background-color:transparent;
@@ -281,10 +281,37 @@ body{
 }
 
 .divImg{
-    margin:auto;
-    padding-bottom: 30px;
+    --gap:clamp(14px, 2.6vh, 28px);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:var(--gap);
+    margin:auto
 }
 
+@supports (height: 100svh) {
+    .divImg {
+        --gap:clamp(14px, 2.6svh, 28px);
+    }
+}
+
+.divImg > br,
+.textAbout p > br{
+    display:none
+}
+
+.textAbout,
+.textAbout p{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:var(--gap);
+    margin:0
+}
+
+/* the boxes of the script signature, the tagline and the link have empty space above and below the glyphs: pull
+   it in (in em) so the visible gaps between the blocks all equal --gap */
 .main{
     display:flex
 }
@@ -297,7 +324,8 @@ body{
 }
 
 .tagline{
-    display:inline-block;
+    display:block;
+    margin:-0.38em 0 -0.2em;
     font-family:"Space Grotesk",system-ui,sans-serif;
     font-weight:500;
     font-size:min(1em, 3vw);
@@ -305,6 +333,9 @@ body{
 }
 
 .signature{
+    display:block;
+    line-height:1.1;
+    margin:0.18em 0 -0.26em;
     font-weight:400;
     font-family: SINERGICA, sans-serif
 }
@@ -333,11 +364,9 @@ i{
 }
 
 .icons{
-    position:absolute;
-    left:0;
-    right:0;
-    margin-top:35px;
-     padding-left: 15px
+    display:flex;
+    justify-content:center;
+    gap:var(--gap-icons, 22px)
 }
 
 .icons a:hover{
@@ -529,7 +558,7 @@ h2{
     width:376px;
     height:423px;
     background-size:cover;
-    margin:0 auto;
+    margin:calc(var(--img, 250px) * -0.133) auto 0;
     background-image:url("../img/image.png")
 }
 
@@ -541,7 +570,7 @@ h2{
 }
 
 .icons a{
-    padding-right:15px;
+    display:flex;
     opacity:1
 }
 
@@ -575,7 +604,7 @@ h2{
 
 .portfolio-link{
     display:inline-block;
-    margin-top:18px;
+    margin:-0.4em 0 -0.35em;
     font-size:18px;
     color:#fff;
     text-transform:uppercase;
