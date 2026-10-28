@@ -137,13 +137,21 @@
 }
 
 
-/* Short phone viewports (browser bars visible): keep the whole first panel on screen */
-@media only screen and (max-width : 767px) and (max-height : 740px) {
-    .img {
-        width: 190px;
-        height: 190px;
+/* Phones: the avatar shrinks with the visible height (the rest of the first panel needs ~340px) so the social icons
+   always stay inside the dark panel, whatever the browser bars take; min-height is the last safety net. */
+@media only screen and (max-width : 767px) {
+    .header-left {
+        min-height: 450px;
     }
 
+    .img {
+        width: clamp(90px, calc(100svh - 340px), 250px);
+        height: clamp(90px, calc(100svh - 340px), 250px);
+    }
+}
+
+/* Short phone viewports (browser bars visible): tighter spacing */
+@media only screen and (max-width : 767px) and (max-height : 740px) {
     .divImg {
         padding-bottom: 0;
     }
@@ -184,7 +192,7 @@
         --m: clamp(20px, 6vh, 64px);
         --p: calc(var(--gap) * 0.4);
 
-        padding: 0 0 calc(var(--m) + var(--p));
+        padding: 0 0 calc(var(--m) + var(--p) + var(--foot));
     }
 
     @supports (height: 100svh) {

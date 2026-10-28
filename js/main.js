@@ -29,6 +29,23 @@ try {
     // the page works without it
 }
 
+// The fixed social footer is shown only while the Portfolio is on screen.
+try {
+    (function() {
+        var portfolio = document.getElementById('portfolio');
+        var footer = document.getElementById('portfolio-footer');
+
+        if (!portfolio || !footer || !('IntersectionObserver' in window)) {
+            return;
+        }
+        new IntersectionObserver(function(entries) {
+            footer.classList.toggle('is-visible', entries[0].isIntersecting);
+        }, { rootMargin: '0px 0px -50% 0px' }).observe(portfolio);
+    }());
+} catch {
+    // the page works without it
+}
+
 var isSafari = /constructor/i.test(window.HTMLElement);
 
 

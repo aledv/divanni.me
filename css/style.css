@@ -560,6 +560,7 @@ h2{
  .iconlink{
      height:32px;
      width:auto;
+     filter:brightness(0) invert(1);
 }
 
  .OPL{
@@ -587,8 +588,10 @@ h2{
 }
 
 .portfolio{
+    --foot:52px;
+
     position:relative;
-    padding:80px 0;
+    padding:80px 0 calc(80px + var(--foot));
     letter-spacing:0.025em;
     line-height:1.6;
     border-top:1px solid #e3e8f5
@@ -792,4 +795,43 @@ h2{
 .github-mark:focus-visible{
     outline:2px solid #044dd1;
     outline-offset:2px
+}
+
+.portfolio-footer{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:5;
+    box-sizing:border-box;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:28px;
+    height:52px;
+    background:linear-gradient(to top, rgb(255 255 255 / 94%) 70%, rgb(255 255 255 / 0%));
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 0.25s ease, visibility 0.25s
+}
+
+.portfolio-footer.is-visible{
+    opacity:1;
+    visibility:visible
+}
+
+.portfolio-footer a{
+    display:inline-flex;
+    padding:6px
+}
+
+.portfolio-footer img{
+    display:block;
+    width:22px;
+    height:22px;
+    transition:transform 0.15s ease
+}
+
+.portfolio-footer a:hover img{
+    transform:scale(1.2)
 }
